@@ -33,7 +33,7 @@ impl ServerExecutor {
 
     /// Multithreaded `block_on` function
     #[inline]
-    pub fn block_on<'x, F, I, R>(&'x mut self, f: F) -> R
+    pub fn block_on<'x, F, I, R>(&'x self, f: F) -> R
     where
         F: FnOnce(&'x Executor<'static>) -> I,
         I: std::future::Future<Output = R> + 'x,
