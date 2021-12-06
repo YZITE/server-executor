@@ -2,6 +2,7 @@
 
 pub use async_executor::Executor;
 use event_listener::Event;
+use futures_lite::future::block_on as fblon;
 use std::sync::Arc;
 
 pub struct ServerExecutor {
@@ -11,6 +12,13 @@ pub struct ServerExecutor {
     shutdown: Event,
 }
 
+impl Default for ServerExecutor {
+    #[inline]
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ServerExecutor {
     pub fn new() -> Self {
         let ret = Self {
@@ -18,7 +26,6 @@ impl ServerExecutor {
             shutdown: Event::new(),
         };
 
-        use futures_lite::future::block_on as fblon;
         for _ in 0..num_cpus::get() {
             let ex = ret.ex.clone();
             let listener = ret.shutdown.listen();
@@ -39,7 +46,7 @@ impl ServerExecutor {
         I: std::future::Future<Output = R> + 'x,
         R: 'x,
     {
-        futures_lite::future::block_on(f(&*self.ex))
+        fblon(f(&*self.ex))
     }
 }
 

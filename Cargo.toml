@@ -1,12 +1,11 @@
 [package]
 name = "yz-server-executor"
-version = "0.1.0"
-authors = ["Erik Zscheile <zseri.devel@ytrizja.de>"]
+version = "0.2.0"
 edition = "2018"
-license = "ISC OR Apache-2.0"
+license = "Apache-2.0 WITH LLVM-exception"
 
 [dependencies]
-async-executor = "1.3"
+async-executor = "1.4"
 event-listener = "2.5"
-futures-lite = "1.11"
+futures-lite = "1.12"
 num_cpus = "1.13"
