@@ -12,6 +12,7 @@ pub struct ServerExecutor {
     shutdown: Event,
 }
 
+#[cfg(feature = "num_cpus")]
 impl Default for ServerExecutor {
     #[inline]
     fn default() -> Self {
@@ -20,13 +21,19 @@ impl Default for ServerExecutor {
 }
 
 impl ServerExecutor {
+    #[cfg(feature = "num_cpus")]
+    #[inline]
     pub fn new() -> Self {
+        Self::with_threads(num_cpus::get())
+    }
+
+    pub fn with_threads(n: usize) -> Self {
         let ret = Self {
             ex: Arc::new(Executor::new()),
             shutdown: Event::new(),
         };
 
-        for _ in 0..num_cpus::get() {
+        for _ in 0..n {
             let ex = ret.ex.clone();
             let listener = ret.shutdown.listen();
             std::thread::Builder::new()
