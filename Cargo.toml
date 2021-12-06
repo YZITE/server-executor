@@ -2,6 +2,7 @@
 name = "yz-server-executor"
 version = "0.2.0"
 description = "simple multithreaded async executor (wraps async-executor)"
+documentation = "https://docs.rs/yz-server-executor"
 edition = "2018"
 license = "Apache-2.0 WITH LLVM-exception"
 
