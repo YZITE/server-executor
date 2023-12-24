@@ -1,16 +1,17 @@
 [package]
 name = "yz-server-executor"
-version = "0.2.0"
+version = "0.3.0"
 description = "simple multithreaded async executor (wraps async-executor)"
 documentation = "https://docs.rs/yz-server-executor"
+repository = "https://github.com/YZITE/server-executor"
 edition = "2018"
 license = "Apache-2.0 WITH LLVM-exception"
 
 [dependencies]
-async-executor = "1.4"
-event-listener = "2.5"
-futures-lite = "1.12"
+async-executor = "1.8"
+event-listener = "4.0"
+futures-lite = "2.1"
 
 [dependencies.num_cpus]
-version = "1.13"
+version = "1.16"
 optional = true

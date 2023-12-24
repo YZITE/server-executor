@@ -49,11 +49,11 @@ impl ServerExecutor {
     #[inline]
     pub fn block_on<'x, F, I, R>(&'x self, f: F) -> R
     where
-        F: FnOnce(&'x Executor<'static>) -> I,
+        F: FnOnce(&'x Arc<Executor<'static>>) -> I,
         I: std::future::Future<Output = R> + 'x,
         R: 'x,
     {
-        fblon(f(&*self.ex))
+        fblon(f(&self.ex))
     }
 }
 
